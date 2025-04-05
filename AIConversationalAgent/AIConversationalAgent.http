@@ -1,0 +1,34 @@
+﻿@AIConversationalAgent_HostAddress = https://localhost:7018
+ 
+
+###
+### Generate Response
+
+@timeout = 1200000  # Timeout set to 120 seconds (60000ms)
+
+POST {{AIConversationalAgent_HostAddress}}/api/llm/generate
+Content-Type: application/json
+
+{
+  "engine": "ollama",
+  "model": "mistral",
+  "template" : "eventInvitation"
+  "prompt": "I want to invite all my customers that have demonstrated interests in AI, Web, and Security to my event named Tech of the Future. Please Generate emails foreach user to that event and send them 1 month before the event started' ",
+  "stream": false
+}
+
+### Stream Response
+POST {{AIConversationalAgent_HostAddress}}/api/llm/stream
+Content-Type: application/json
+
+{
+  "engine": "ollama",
+  "model": "mistral",
+  "template" : "billStatement"
+  "prompt": "Give me the details of this bill statement in the format of strucutred json file related to the data in here. the text is this : ",
+  "stream": false
+}
+
+### Get Available Models
+GET {{AIConversationalAgent_HostAddress}}/api/llm/models?engine=ollama
+Content-Type: application/json
